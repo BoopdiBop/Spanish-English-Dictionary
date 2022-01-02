@@ -66,15 +66,17 @@ class SearchBot:
             
     def output_message(self):
         message = ''
+        message += ("   " + self.query.upper() + "\n")
         if self.grammar_dict: 
             for grammar, meanings in self.grammar_dict.items():
+                message += "----------------------------------------------------------------------\n"
                 message += ("\t" + grammar + "\n")
                 for meaning, definitions in meanings.items():
-                    message += ("\t\t" + meaning + "\n")
+                    message += ("\t" + meaning + "\n")
                     for definition, sentences in definitions.items():
-                        message += ("\t\t\t" + definition + "\n")
-                        message += ("\t\t\t\t" + str(sentences[0]) + "\n")
-                        message += ("\t\t\t\t" + str(sentences[1]) + "\n")
+                        message += ("\t\t" + definition + "\n")
+                        message += ("\t\t\t" + str(sentences[0]) + "\n")
+                        message += ("\t\t\t" + str(sentences[1]) + "\n")
                         
                             
                 message += "\n"

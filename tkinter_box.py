@@ -10,12 +10,15 @@ def send_info():
     newWindow = tk.Toplevel(window)
     
     newWindow.title("Word")
-    tk.Label(newWindow, text = "this is a new window").pack()
+    #tk.Label(newWindow, text = search_bot.query).pack()
     
     message = search_bot.output_message()
     text_box = tk.Text(newWindow, height=39, width=120, wrap='word')
     text_box.pack(padx=20, side=tk.LEFT, expand=True)
     text_box.insert(tk.END, message)
+    
+    
+ 
     
     sb = tk.Scrollbar(newWindow)
     
