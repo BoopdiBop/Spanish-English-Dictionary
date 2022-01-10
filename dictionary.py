@@ -12,7 +12,8 @@ class SearchBot:
         page = requests.get(URL)
         soup = BeautifulSoup(page.content, "html.parser")
         
-        green_text = soup.find_all(class_=["_2VBIE8Jw", "_2-ylzxko", "_1vjZoH4D", "_3nHbP_Tm", "_3AjVTHH0", "_2vd6M2gR"])
+        #green_text = soup.find_all(class_=["_2VBIE8Jw", "_2-ylzxko", "_1vjZoH4D", "_3nHbP_Tm", "_3AjVTHH0", "_2vd6M2gR"])
+        green_text = soup.find_all(class_=["href--2VBIE8Jw", "context--2-ylzxko", "neodictTranslation--2vd6M2gR", "exampleFirstHalf--1vjZoH4D", "exampleSecondHalf--3nHbP_Tm"])
         
         lru_grammar_word = ""
         lru_green_text = ""
@@ -21,26 +22,28 @@ class SearchBot:
 
         for element in green_text:
             # we are adding in the grammar words 1st tier
-            if element['class'][0] == "_2VBIE8Jw" or element['class'][0] == "_3AjVTHH0":
+            if element['class'][0] == "href--2VBIE8Jw" or element['class'][0] == "_3AjVTHH0":
                 if element.text not in self.grammar_dict:
                     # this dictionary will have the general uses as the key (text in ()), with values being an tuple of tuples (eng - es translation)
                     self.grammar_dict[element.text] = {}
                 lru_grammar_word = element.text
+                #print(lru_grammar_word)
             # general use (text in ())
-            elif element['class'][0] == "_2-ylzxko":
+            elif element['class'][0] == "context--2-ylzxko":
                 # assuming this general use text is not used more than once
                 if element.text not in self.grammar_dict[lru_grammar_word]:
                     self.grammar_dict[lru_grammar_word][element.text] = {}
                 lru_green_text = element.text
-            elif element['class'][0] =="_2vd6M2gR":
+                print(lru_green_text)
+            elif element['class'][0] =="neodictTranslation--2vd6M2gR":
                 #definition = definition + " | " + element.text
                 if definition != "":
                     definition += (" | " + element.text)
                 else:
                     definition += (" " + element.text)
-            elif element['class'][0] =="_1vjZoH4D":
+            elif element['class'][0] =="exampleFirstHalf--1vjZoH4D":
                 sentence_pair.append(element.text)
-            elif element['class'][0] =="_3nHbP_Tm":
+            elif element['class'][0] =="exampleSecondHalf--3nHbP_Tm":
                 sentence_pair.append(element.text)
             
             
@@ -81,7 +84,7 @@ class SearchBot:
                             
                 message += "\n"
         else:
-            message = "must perform search_query method first."
+            return "None"
             
         return message
 
