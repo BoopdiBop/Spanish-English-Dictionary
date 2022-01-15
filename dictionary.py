@@ -34,7 +34,7 @@ class SearchBot:
                 if element.text not in self.grammar_dict[lru_grammar_word]:
                     self.grammar_dict[lru_grammar_word][element.text] = {}
                 lru_green_text = element.text
-                print(lru_green_text)
+                #print(lru_green_text)
             elif element['class'][0] =="neodictTranslation--2vd6M2gR":
                 #definition = definition + " | " + element.text
                 if definition != "":
